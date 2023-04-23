@@ -1,0 +1,68 @@
+Alexander Maso				  ECE 373				Spring 2022
+					Homework #1
+					
+1) A. BUGS
+	Currently,  it is not possible to enable signal-driven I/O by specifying O_ASYNC when 	calling open(); use fcntl(2) to enable this flag.
+
+	One must check for two different error codes, EISDIR and ENOENT, when trying  to  		determine  whether  the kernel supports O_TMPFILE functionality.
+
+	When  both O_CREAT and O_DIRECTORY are specified in flags and the file specified by 	pathname does not ex‐ist, open() will create a regular file (i.e., O_DIRECTORY is 		ignored).
+
+   B.  The files "sys/types.h", "sys/stats.h", and "fcntl.h" must be included to use the open() 		function
+
+   C.  The functions chmod(), chown() and close() are the first three listed system calls 		relating to open()
+   
+   D.  The system call "close()" does not appear to have any bugs listed in the man pages.  The 		only file that must be included to use this function is "unistd.h".
+   
+   
+2) A.	The struct "usb_device" is defined in the file "usb.h".
+	The first five members of the struct are listed below:
+		struct usb_device {
+			int		devnum;
+			char		devpath[16];
+			u32		route;
+			enum usb_device_state	state;
+			enum usb_device_speed	speed;
+			
+   B.	The type for the fifth member of the struct is declared in the header file "ch9.h"
+   
+   C.  The enumeration declaration for enum usb_device_speed is copied below:	
+   	enum usb_device_speed {
+		USB_SPEED_UNKNOWN = 0,			/* enumerating */
+		USB_SPEED_LOW, USB_SPEED_FULL,	/* usb 1.1 */
+		USB_SPEED_HIGH,			/* usb 2.0 */
+		USB_SPEED_WIRELESS,			/* wireless (usb 2.5) */
+		USB_SPEED_SUPER,			/* usb 3.0 */
+		USB_SPEED_SUPER_PLUS,			/* usb 3.1 */
+	};
+	
+    All of the above answers were found on elixir.bootlin.com on Linux v5.17.2
+    
+    
+3)  Basic C Programming in Linux
+
+/*
+
+Progam to convert fahrenheit to celsius
+
+Alex Maso  4/10/22
+*/
+
+#include <iostream>
+
+double fahrenheit2Celsius(double fahrenheit) {
+
+        double celsius;
+
+        celsius = (fahrenheit - 32.0) * (5.0 / 9.0);
+        return celsius;
+}
+
+int main() {
+
+        double fahrenheit;
+        std::cout << "Input temperature in degrees fahrenheit: " << std::endl;
+        std::cin >> fahrenheit;
+        std::cout << "Temperature in celsius: " << fahrenheitToCelsius(fahrenheit) << std::endl;
+}
+
